@@ -1,1 +1,1 @@
-# game-hub
+A small project for practicing React.
