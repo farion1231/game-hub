@@ -1,7 +1,7 @@
 // 本地导入游戏类型数据
 import { useQuery } from "@tanstack/react-query";
 import apiClient from "../services/api-client";
-import { FetchDataResponse } from "./useData";
+import { FetchDataResponse } from "../services/api-client";
 import genres from "../data/genre";
 
 export interface Genre {
