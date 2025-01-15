@@ -3,7 +3,7 @@ import apiClient from "../services/api-client";
 import { useState, useEffect } from "react";
 
 // 定义API响应数据的接口类型
-interface FetchDataResponse<T> {
+export interface FetchDataResponse<T> {
   count: number; // 数据总数
   results: T[]; // 实际数据数组
 }
