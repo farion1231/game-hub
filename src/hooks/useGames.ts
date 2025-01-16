@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { GameQuery } from "../App";
 import ApiClient, { FetchDataResponse } from "../services/api-client";
 import { Platform } from "./usePlatforms";
@@ -15,18 +15,22 @@ export interface Game {
 const apiClient = new ApiClient<Game>("/games");
 
 const useGames = (gameQuery: GameQuery) => {
-  return useQuery<FetchDataResponse<Game>, Error>({
+  return useInfiniteQuery<FetchDataResponse<Game>, Error>({
     queryKey: ["games", gameQuery], // 查询key，改变gameQuery，则重新获取数据
-    queryFn: () =>
+    queryFn: ({ pageParam = 1 }) =>
       apiClient.getAll({
         params: {
           genres: gameQuery.genre?.id, // 如果selectedGenre为null，则不添加这个参数
           parent_platforms: gameQuery.platform?.id, // 如果selectedPlatform为null，则不添加这个参数
           ordering: gameQuery.sortOrder,
           search: gameQuery.searchText,
+          page: pageParam,
         },
       }),
     staleTime: 1000 * 60 * 60 * 24, // 24小时
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.next ? allPages.length + 1 : undefined;
+    },
   });
 };
 
