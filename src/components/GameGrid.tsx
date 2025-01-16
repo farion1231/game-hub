@@ -27,10 +27,22 @@ const GameGrid = ({ gameQuery }: Props) => {
 
   return (
     <InfiniteScroll
-      dataLength={fetchGamesCount} // 现有数据总数
-      hasMore={!!hasNextPage} // 是否还有更多数据 !! 转换为布尔值
-      next={() => fetchNextPage()} // 加载更多数据
-      loader={<GameCardSkeleton />} // 加载中组件
+      dataLength={fetchGamesCount}
+      hasMore={!!hasNextPage}
+      next={() => fetchNextPage()}
+      loader={
+        <SimpleGrid
+          columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+          padding={10}
+          spacing={6}
+        >
+          {skeletons.map((skeleton) => (
+            <GameCardContainer key={skeleton}>
+              <GameCardSkeleton />
+            </GameCardContainer>
+          ))}
+        </SimpleGrid>
+      }
     >
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
