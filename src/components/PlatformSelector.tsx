@@ -1,6 +1,7 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 import { Platform, usePlatforms } from "../hooks/usePlatforms";
+import usePlatform from "../hooks/usePlatform";
 
 interface Props {
   selectedPlatformId?: number;
@@ -9,9 +10,7 @@ interface Props {
 
 const PlatformSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
   const { data, error } = usePlatforms(); // 获取平台数据
-  const selectedPlatform = data?.results.find(
-    (p) => p.id === selectedPlatformId
-  ); // 找到选中的平台
+  const selectedPlatform = usePlatform(selectedPlatformId); // 找到选中的平台
 
   if (error) return null;
   return (

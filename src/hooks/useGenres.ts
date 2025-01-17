@@ -16,7 +16,7 @@ const useGenres = () => {
     queryKey: ["genres"],
     queryFn: apiClient.getAll,
     staleTime: 1000 * 60 * 60 * 24, // 24小时
-    initialData: { count: genres.length, results: genres }, // 本地数据
+    initialData: genres, // 本地数据
   });
 };
 

@@ -1,3 +1,4 @@
+import platforms from "../data/platforms";
 import ApiClient from "../services/api-client";
 import { useQuery } from "@tanstack/react-query";
 
@@ -13,5 +14,6 @@ export const usePlatforms = () => {
     queryKey: ["platforms"],
     queryFn: apiClient.getAll,
     staleTime: 1000 * 60 * 60 * 24, // 24小时
+    initialData: platforms, // 本地数据
   });
 };
