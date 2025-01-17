@@ -20,8 +20,8 @@ const useGames = (gameQuery: GameQuery) => {
     queryFn: ({ pageParam = 1 }) =>
       apiClient.getAll({
         params: {
-          genres: gameQuery.genre?.id, // 如果selectedGenre为null，则不添加这个参数
-          parent_platforms: gameQuery.platform?.id, // 如果selectedPlatform为null，则不添加这个参数
+          genres: gameQuery.genreId, // 如果selectedGenre为null，则不添加这个参数
+          parent_platforms: gameQuery.platformId, // 如果selectedPlatform为null，则不添加这个参数
           ordering: gameQuery.sortOrder,
           search: gameQuery.searchText,
           page: pageParam,

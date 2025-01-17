@@ -3,12 +3,16 @@ import { BsChevronDown } from "react-icons/bs";
 import { Platform, usePlatforms } from "../hooks/usePlatforms";
 
 interface Props {
-  selectedPlatform: Platform | null;
+  selectedPlatformId?: number;
   onSelectPlatform: (platform: Platform) => void;
 }
 
-const PlatformSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
-  const { data, error } = usePlatforms();
+const PlatformSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
+  const { data, error } = usePlatforms(); // 获取平台数据
+  const selectedPlatform = data?.results.find(
+    (p) => p.id === selectedPlatformId
+  ); // 找到选中的平台
+
   if (error) return null;
   return (
     <Menu>
