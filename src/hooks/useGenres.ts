@@ -1,7 +1,8 @@
 // 本地导入游戏类型数据
 import { useQuery } from "@tanstack/react-query";
-import ApiClient from "../services/api-client";
+import ms from "ms";
 import genres from "../data/genre";
+import ApiClient from "../services/api-client";
 
 export interface Genre {
   id: number;
@@ -15,7 +16,7 @@ const useGenres = () => {
   return useQuery({
     queryKey: ["genres"],
     queryFn: apiClient.getAll,
-    staleTime: 1000 * 60 * 60 * 24, // 24小时
+    staleTime: ms("24h"), // 24小时
     initialData: genres, // 本地数据
   });
 };
