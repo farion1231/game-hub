@@ -8,15 +8,13 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 import getCroppedImageUrl from "../services/image-url";
-import { Genre } from "../hooks/useGenres";
+import useGameQueryStore from "../store";
 
-interface Props {
-  onSelectGenre: (genre: Genre) => void;
-  selectedGenreId?: number;
-}
-
-const GenreList = ({ onSelectGenre, selectedGenreId }: Props) => {
+const GenreList = () => {
   const { data, isLoading, error } = useGenres();
+  const selectedGenreId = useGameQueryStore((s) => s.gameQuery.genreId);
+  const setGenreId = useGameQueryStore((s) => s.setGenreId);
+
   return (
     <>
       <Heading fontSize="2xl" marginBottom={3} marginTop={9}>
@@ -35,7 +33,7 @@ const GenreList = ({ onSelectGenre, selectedGenreId }: Props) => {
                 objectFit="cover" // to make the image cover the whole box
               />
               <Button
-                onClick={() => onSelectGenre(genre)}
+                onClick={() => setGenreId(genre.id)}
                 fontSize="lg"
                 variant="link"
                 fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
