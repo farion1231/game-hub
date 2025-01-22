@@ -10,6 +10,8 @@ export interface Game {
   parent_platforms: { platform: Platform }[];
   metacritic: number;
   rating_top: number;
+  slug: string; // 用于生成游戏详情页的URL
+  description_raw: string; // 游戏描述
 }
 
 const apiClient = new ApiClient<Game>("/games");
