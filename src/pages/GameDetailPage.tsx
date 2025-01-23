@@ -18,7 +18,7 @@ const GameDetailPage = () => {
       <Heading>{game.name}</Heading>
       <ExpandableText>{game.description_raw}</ExpandableText>
       <GameAttributes game={game} />
-      <GameTrailer gameId={game.id} /> //目前无效
+      <GameTrailer gameId={game.id} />
       <GameScreenShots game_pk={game.id} />
     </>
   );
